@@ -2,8 +2,7 @@ Package: grPipe
 Type: Package
 Title: Graphviz Pipeline Plot Based on Grids (grPipe: Graphviz Pipeline)
 Version: 0.1.0
-Author: Daniel Gaspar Gonçalves <daniel.gaspar.goncalves@gmail.com>
-Maintainer: Daniel Gaspar Gonçalves <daniel.gaspar.goncalves@gmail.com>
+Authors@R: person("Daniel", "Gaspar Gonçalves", email = "daniel.gaspar.goncalves@gmail.com", role = c("aut", "cre"))
 Description: Create a grid-based graphviz using the following functions:
     1 - Creating the data.frame where the nodes are;
     2 - Adding and editing nodes;
