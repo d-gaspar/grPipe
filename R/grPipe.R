@@ -1,12 +1,20 @@
 # create new graphviz data.frame
-grPipe.create = function() {
-  return(
-    data.frame(
+grPipe.create = function(nrow = 0, ncol = 0) {
+  if (nrow==0 | ncol==0) {
+    nodes = data.frame(
       id = character(0),
       id_next = character(0),
       text = character(0)
     )
-  )
+  } else {
+    nodes = data.frame(
+      id = paste0(LETTERS[ncol], nrow),
+      id_next = NA,
+      text = NA
+    )
+  }
+
+  return(nodes)
 }
 
 # add or update nodes
@@ -31,7 +39,7 @@ grPipe.node = function(nodes, id, id_next, text) {
 }
 
 # plot
-grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE) {
+grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colSpace=0.5, rowSpace=0.5) {
   if (showGrid) {
     gridStyle = "filled"
   } else {
@@ -71,10 +79,12 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE) {
   # nodes label
   nodes_label = c()
   for (i in 1:nrow(nodes)) {
-    nodes_label = c(
-      nodes_label,
-      paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", style=filled]")
-    )
+    if (!is.na(nodes[i, "text"])) {
+      nodes_label = c(
+        nodes_label,
+        paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", style=filled]")
+      )
+    }
   }
   nodes_label = paste0(nodes_label, collapse = "\n")
 
@@ -94,7 +104,7 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE) {
   grViz(paste0('
     digraph {
         fontname="Verdana"
-        graph [splines=ortho]
+        graph [splines=ortho, nodesep="', colSpace, '", ranksep="', rowSpace, '"]
         node [shape=plaintext, fontname="Verdana", style=', gridStyle, ']
         //node [shape=box, fontname="Verdana", style=filled]
         edge [fontname="Verdana"]
