@@ -2,19 +2,6 @@
 #' @title add or update grPipe nodes
 #'
 #' @description
-#' parameters:
-#'     - nodes: data.frame (
-#'           id: character,
-#'           id_next: character,
-#'           text: character
-#'       )
-#'     - id: character
-#'     - id_next: character
-#'     - text: character
-#' return data.frame colnames:
-#'     - id: character
-#'     - id_next: character
-#'     - text: character
 #' add a new node if it doesn't exist or update an existing one.
 #'
 #' @param nodes data.frame

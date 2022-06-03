@@ -2,18 +2,6 @@
 #' @title plot grPipe nodes
 #'
 #' @description
-#' parameters:
-#'     - nodes: data.frame (
-#'           id: character,
-#'           id_next: character,
-#'           text: character
-#'       )
-#'     - pngfile: character
-#'     - title: character, default = ""
-#'     - plot: logical, default = TRUE
-#'     - showGrid: logical, default = FALSE
-#'     - colSpace: numeric, default = 0.5
-#'     - rowSpace: numeric, default = 0.5
 #' save grPipe nodes in pngfile path.
 #'
 #' @param nodes data.frame

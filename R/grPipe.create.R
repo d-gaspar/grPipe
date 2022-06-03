@@ -2,13 +2,6 @@
 #' @title create new graphviz data.frame (grPipe nodes)
 #'
 #' @description
-#' parameters:
-#'     - nrow: integer, default = 0
-#'     - ncol: integer, default = 0
-#' return data.frame colnames:
-#'     - id: character
-#'     - id_next: character
-#'     - text: character
 #' if nrow or ncol parameters are equal zero, then the output will be an empty data.frame.
 #'
 #' @param nrow integer
