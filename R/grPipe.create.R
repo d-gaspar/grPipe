@@ -1,5 +1,27 @@
 
-# create new graphviz data.frame
+#' @title create new graphviz data.frame (grPipe nodes)
+#'
+#' @description
+#' parameters:
+#'     - nrow: integer, default = 0
+#'     - ncol: integer, default = 0
+#' return data.frame colnames:
+#'     - id: character
+#'     - id_next: character
+#'     - text: character
+#' if nrow or ncol parameters are equal zero, then the output will be an empty data.frame.
+#'
+#' @param nrow integer
+#' @param ncol integer
+#'
+#' @author Daniel Gaspar Gonçalves
+#'
+#' @examples
+#' nodes = grPipe.create()
+#' nodes = grPipe.create(nrow = 2, ncol = 5)
+#'
+#' @export
+
 grPipe.create = function(nrow = 0, ncol = 0) {
   if (nrow==0 | ncol==0) {
     nodes = data.frame(
@@ -9,7 +31,7 @@ grPipe.create = function(nrow = 0, ncol = 0) {
     )
   } else {
     nodes = data.frame(
-      id = paste0(LETTERS[ncol], nrow),
+      id = paste0(LETTERS[nrow], ncol),
       id_next = NA,
       text = NA
     )

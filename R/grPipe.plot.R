@@ -1,5 +1,45 @@
 
-# plot
+#' @title plot grPipe nodes
+#'
+#' @description
+#' parameters:
+#'     - nodes: data.frame (
+#'           id: character,
+#'           id_next: character,
+#'           text: character
+#'       )
+#'     - pngfile: character
+#'     - title: character, default = ""
+#'     - plot: logical, default = TRUE
+#'     - showGrid: logical, default = FALSE
+#'     - colSpace: numeric, default = 0.5
+#'     - rowSpace: numeric, default = 0.5
+#' save grPipe nodes in pngfile path.
+#'
+#' @param nodes data.frame
+#' @param pngfile character
+#' @param title character
+#' @param plot logical
+#' @param showGrid logical
+#' @param colSpace numeric
+#' @param rowSpace numeric
+#'
+#' @author Daniel Gaspar Gonçalves
+#'
+#' @examples
+#' nodes = grPipe.create(2,5)
+#' nodes = grPipe.node(nodes, "A1",  "A2",  "input")
+#' nodes = grPipe.node(nodes, "A2",  "B2",  "step 1")
+#' nodes = grPipe.node(nodes, "B2",  "B3",  "step 2")
+#' nodes = grPipe.node(nodes, "B3",  "B4",  "step 3")
+#' nodes = grPipe.node(nodes, "B4",  "A4",  "step 4")
+#' nodes = grPipe.node(nodes, "A4",  "A5",  "step 5")
+#' nodes = grPipe.node(nodes, "A5",  NA,  "output")
+#' grPipe.plot(nodes, tempfile(), showGrid = TRUE)
+#' grPipe.plot(nodes, tempfile(), showGrid = FALSE)
+#'
+#' @export
+
 grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colSpace=0.5, rowSpace=0.5) {
   if (showGrid) {
     gridStyle = "filled"
@@ -9,19 +49,22 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
 
   # rows
   rows = nodes %>%
-    .[,"id"] %>%
-    gsub(pattern = "([A-Z])[0-9]*", replacement = "\\1", x = .) %>%
+    select(id) %>%
+    unlist %>%
+    as.character
+  rows = gsub(pattern = "([A-Z])[0-9]*", replacement = "\\1", x = rows) %>%
     unique %>%
-    max %>%
-    grep(pattern = ., x = LETTERS) %>%
-    {LETTERS[1:.]}
+    max
+  rows = grep(pattern = rows, x = LETTERS)
+  rows = LETTERS[1:rows]
 
   # cols
   cols = nodes %>%
-    .[,"id"] %>%
-    gsub(pattern = "[A-Z]([0-9]*)", replacement = "\\1", x = .) %>%
-    as.integer %>%
-    {1:max(.)}
+    select(id) %>%
+    unlist %>%
+    as.character
+  cols = gsub(pattern = "[A-Z]([0-9]*)", replacement = "\\1", x = cols) %>% as.integer
+  cols = 1:max(cols)
 
   # rank cols
   rank_col = c()
@@ -95,6 +138,6 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
   # plot image on notebook
   if (plot) {
     readPNG(pngfile) %>%
-      grid.raster(.)
+      grid.raster
   }
 }

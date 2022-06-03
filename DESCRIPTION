@@ -12,6 +12,7 @@ LazyData: true
 Imports:
   DiagrammeR,
   DiagrammeRsvg,
+  dplyr,
   magrittr,
   rsvg,
   png,
