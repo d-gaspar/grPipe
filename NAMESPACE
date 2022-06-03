@@ -1,5 +1,4 @@
 export(grPipe.create, grPipe.node, grPipe.plot)
 
-importFrom(
-  png, readPNG
-)
+importFrom(png, readPNG)
+importFrom(magrittr, "%>%")

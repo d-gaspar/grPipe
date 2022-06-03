@@ -1,19 +1,18 @@
 Package: grPipe
 Type: Package
-Title: What the Package Does (Title Case)
+Title: graphviz Pipeline plot based on grids (grPipe: graphviz Pipeline)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Daniel Gaspar Gonçalves
+Maintainer: The package maintainer <daniel.gaspar.goncalves@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-Depends:
-  dplyr
 Imports:
   DiagrammeR,
   DiagrammeRsvg,
+  magrittr,
   rsvg,
   png,
   grid
