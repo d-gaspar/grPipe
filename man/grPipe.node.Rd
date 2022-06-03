@@ -2,7 +2,7 @@
 % Please edit documentation in R/grPipe.node.R
 \name{grPipe.node}
 \alias{grPipe.node}
-\title{add or update grPipe nodes}
+\title{Add or Update grPipe Nodes}
 \usage{
 grPipe.node(nodes, id, id_next, text)
 }

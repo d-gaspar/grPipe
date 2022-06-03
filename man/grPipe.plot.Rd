@@ -2,7 +2,7 @@
 % Please edit documentation in R/grPipe.plot.R
 \name{grPipe.plot}
 \alias{grPipe.plot}
-\title{plot grPipe nodes}
+\title{Plot grPipe Nodes}
 \usage{
 grPipe.plot(
   nodes,

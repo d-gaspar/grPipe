@@ -2,7 +2,7 @@
 % Please edit documentation in R/grPipe.create.R
 \name{grPipe.create}
 \alias{grPipe.create}
-\title{create new graphviz data.frame (grPipe nodes)}
+\title{Create New Graphviz Data.Frame (grPipe Nodes)}
 \usage{
 grPipe.create(nrow = 0, ncol = 0)
 }
