@@ -1,5 +1,5 @@
 
-#' @title plot grPipe nodes
+#' @title Plot grPipe Nodes
 #'
 #' @description
 #' save grPipe nodes in pngfile path.

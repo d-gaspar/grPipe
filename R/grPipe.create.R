@@ -1,5 +1,5 @@
 
-#' @title create new graphviz data.frame (grPipe nodes)
+#' @title Create New Graphviz Data.Frame (grPipe Nodes)
 #'
 #' @description
 #' if nrow or ncol parameters are equal zero, then the output will be an empty data.frame.

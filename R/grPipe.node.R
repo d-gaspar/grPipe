@@ -1,5 +1,5 @@
 
-#' @title add or update grPipe nodes
+#' @title Add or Update grPipe Nodes
 #'
 #' @description
 #' add a new node if it doesn't exist or update an existing one.

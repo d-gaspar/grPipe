@@ -1,11 +1,14 @@
 Package: grPipe
 Type: Package
-Title: graphviz Pipeline plot based on grids (grPipe: graphviz Pipeline)
+Title: Graphviz Pipeline Plot Based on Grids (grPipe: Graphviz Pipeline)
 Version: 0.1.0
 Author: Daniel Gaspar Gonçalves
 Maintainer: The package maintainer <daniel.gaspar.goncalves@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: This package creates a grid-based graphviz.
+    This package has 3 functions:
+    1 - Creating the data.frame where the nodes are;
+    2 - Adding and editing nodes;
+    3 - Plotting these nodes.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
