@@ -9,7 +9,6 @@ Description: Create a grid-based graphviz using the following functions:
     3 - Plotting these nodes.
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 Imports:
   DiagrammeR,
   DiagrammeRsvg,
