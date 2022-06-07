@@ -7,6 +7,17 @@
 #' @param nrow integer
 #' @param ncol integer
 #'
+#' @return Returns a data.frame with 3 columns (id, id_next and text) where:
+#' \itemize{
+#'     \item if nrow==0 or ncol==0, then return an empty data.frame;
+#'     \item if nrow>0 and ncol>0, then return a data.frame with one row:
+#'     \itemize{
+#'         \item id = paste0(LETTERS[nrow], ncol)
+#'         \item id_next = NA
+#'         \item text = NA
+#'     }
+#' }
+#'
 #' @author Daniel Gaspar Gonçalves
 #'
 #' @examples

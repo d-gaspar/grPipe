@@ -29,8 +29,11 @@ grPipe.plot(
 
 \item{rowSpace}{numeric}
 }
+\value{
+No return value.
+}
 \description{
-save grPipe nodes in pngfile path.
+save grPipe nodes in \strong{pngfile} path.
 }
 \examples{
 nodes = grPipe.create(2,5)

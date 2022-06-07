@@ -15,6 +15,13 @@ grPipe.node(nodes, id, id_next, text)
 
 \item{text}{character}
 }
+\value{
+Returns a data.frame with 3 columns (id, id_next and text) where:
+\itemize{
+    \item If \strong{id} and \strong{id_next} already exist in the data.frame \strong{nodes}, then return the data.frame \strong{nodes} with the value \strong{text} updated;
+    \item Otherwise, add a row in the data.frame \strong{nodes} with the values passed (\strong{id}, \strong{id_next} and \strong{text}) and then return the data.frame \strong{nodes}.
+}
+}
 \description{
 add a new node if it doesn't exist or update an existing one.
 }
