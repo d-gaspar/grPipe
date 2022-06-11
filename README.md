@@ -1,4 +1,3 @@
-<center><font size="7">grPipe</font></center>
 
 # Example 1
 
