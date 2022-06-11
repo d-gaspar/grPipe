@@ -2,7 +2,7 @@
 #' @title Plot grPipe Nodes
 #'
 #' @description
-#' save grPipe nodes in pngfile path.
+#' save grPipe nodes in \strong{pngfile} path.
 #'
 #' @param nodes data.frame
 #' @param pngfile character
@@ -11,6 +11,8 @@
 #' @param showGrid logical
 #' @param colSpace numeric
 #' @param rowSpace numeric
+#'
+#' @return No return value.
 #'
 #' @author Daniel Gaspar Gonçalves
 #'

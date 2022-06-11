@@ -11,6 +11,18 @@ grPipe.create(nrow = 0, ncol = 0)
 
 \item{ncol}{integer}
 }
+\value{
+Returns a data.frame with 3 columns (id, id_next and text) where:
+\itemize{
+    \item if nrow==0 or ncol==0, then return an empty data.frame;
+    \item if nrow>0 and ncol>0, then return a data.frame with one row:
+    \itemize{
+        \item id = paste0(LETTERS[nrow], ncol)
+        \item id_next = NA
+        \item text = NA
+    }
+}
+}
 \description{
 if nrow or ncol parameters are equal zero, then the output will be an empty data.frame.
 }
