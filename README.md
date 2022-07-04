@@ -1,7 +1,6 @@
-
 # Example 1
 
-```R
+``` r
 library(grPipe)
 
 # create grPipe
@@ -9,30 +8,28 @@ nodes = grPipe.create(nrow = 2, ncol = 5)
 nodes
 ```
 
-<table class="dataframe">
-<caption>A data.frame: 1 x 3</caption>
-<thead>
-	<tr><th scope=col>id</th><th scope=col>id_next</th><th scope=col>text</th></tr>
-	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;lgl&gt;</th><th scope=col>&lt;lgl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><td>B5</td><td>NA</td><td>NA</td></tr>
-</tbody>
-</table>
+| id      | id_next | text    |
+|---------|---------|---------|
+| \<chr\> | \<lgl\> | \<lgl\> |
+| B5      | NA      | NA      |
 
-```R
+A data.frame: 1 x 3
+
+A data.frame: 1 x 3
+
+``` r
 # plot raw grPipe
 grPipe.plot(
     nodes = nodes,
-    pngfile = "grPipe.1a.png",
+    pngfile = "man/figures/grPipe.1a.png",
     title = "grPipe",
     showGrid = TRUE
 )
 ```
-    
-![](images/grPipe.1a.png)
 
-```R
+![](man/figures/grPipe.1a.png)
+
+``` r
 # add nodes
 nodes = grPipe.node(nodes, "A1",  "A2",  "input\n31 samples")
 nodes = grPipe.node(nodes, "A2",  "B2",  "step 1\n25 samples")
@@ -45,30 +42,30 @@ nodes = grPipe.node(nodes, "A4",  "A5",  "step 5\n11 samples")
 nodes = grPipe.node(nodes, "A5",  NA,  "output\n10 samples")
 ```
 
-```R
+``` r
 # plot grPipe (showGrid = TRUE)
 grPipe.plot(
     nodes = nodes,
-    pngfile = "grPipe.1b.png",
+    pngfile = "man/figures/grPipe.1b.png",
     title = "grPipe",
     showGrid = TRUE
 )
 ```
-    
-![](images/grPipe.1b.png)
 
-```R
+![](man/figures/grPipe.1b.png)
+
+``` r
 # plot grPipe (showGrid = FALSE)
-grPipe.plot(nodes = nodes, pngfile = "grPipe.1c.png", title = "grPipe")
+grPipe.plot(nodes = nodes, pngfile = "man/figures/grPipe.1c.png", title = "grPipe")
 ```
-  
-![](images/grPipe.1c.png)
 
----
+![](man/figures/grPipe.1c.png)
+
+------------------------------------------------------------------------
 
 # Example 2
 
-```R
+``` r
 library(grPipe)
 
 # create grPipe
@@ -76,30 +73,28 @@ nodes = grPipe.create(nrow = 3, ncol = 5)
 nodes
 ```
 
-<table class="dataframe">
-<caption>A data.frame: 1 × 3</caption>
-<thead>
-	<tr><th scope=col>id</th><th scope=col>id_next</th><th scope=col>text</th></tr>
-	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;lgl&gt;</th><th scope=col>&lt;lgl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><td>C5</td><td>NA</td><td>NA</td></tr>
-</tbody>
-</table>
+| id      | id_next | text    |
+|---------|---------|---------|
+| \<chr\> | \<lgl\> | \<lgl\> |
+| C5      | NA      | NA      |
 
-```R
+A data.frame: 1 × 3
+
+A data.frame: 1 × 3
+
+``` r
 # plot raw grPipe
 grPipe.plot(
     nodes = nodes,
-    pngfile = "grPipe.2a.png",
+    pngfile = "man/figures/grPipe.2a.png",
     title = "grPipe",
     showGrid = TRUE
 )
 ```
 
-![](images/grPipe.2a.png)
+![](man/figures/grPipe.2a.png)
 
-```R
+``` r
 # add nodes
 nodes = grPipe.node(nodes, "A3",  "B2",  "project/")
 nodes = grPipe.node(nodes, "B2",  "C1",  "data/")
@@ -123,28 +118,28 @@ nodes = grPipe.node(nodes, "C5",  NA,  "plot.png")
 nodes = grPipe.node(nodes, "A2",  NA,  "tasks.txt")
 ```
 
-```R
+``` r
 # plot grPipe (showGrid = TRUE)
 grPipe.plot(
     nodes = nodes,
-    pngfile = "grPipe.2b.png",
+    pngfile = "man/figures/grPipe.2b.png",
     title = "grPipe",
     showGrid = TRUE,
     colSpace = 1
 )
 ```
 
-![](images/grPipe.2b.png)
+![](man/figures/grPipe.2b.png)
 
-```R
+``` r
 # plot grPipe (showGrid = TRUE)
 grPipe.plot(
     nodes = nodes,
-    pngfile = "grPipe.2c.png",
+    pngfile = "man/figures/grPipe.2c.png",
     title = "grPipe",
     showGrid = FALSE,
     colSpace = 1
 )
 ```
 
-![](images/grPipe.2c.png)
+![](man/figures/grPipe.2c.png)
