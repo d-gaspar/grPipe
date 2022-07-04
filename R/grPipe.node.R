@@ -8,8 +8,9 @@
 #' @param id character
 #' @param id_next character
 #' @param text character
+#' @param attr character
 #'
-#' @return Returns a data.frame with 3 columns (id, id_next and text) where:
+#' @return Returns a data.frame with 4 columns (id, id_next, text and attr) where:
 #' \itemize{
 #'     \item If \strong{id} and \strong{id_next} already exist in the data.frame \strong{nodes}, then return the data.frame \strong{nodes} with the value \strong{text} updated;
 #'     \item Otherwise, add a row in the data.frame \strong{nodes} with the values passed (\strong{id}, \strong{id_next} and \strong{text}) and then return the data.frame \strong{nodes}.
@@ -29,20 +30,27 @@
 #'
 #' @export
 
-grPipe.node = function(nodes, id, id_next, text) {
+grPipe.node = function(nodes, id, id_next, text, attr = "style=filled, shape=box, fillcolor='#d3d3d3', color='#d3d3d3', margin='0.2,0'") {
   # node already exist
   node.exists = (nodes %>% filter(id=={{id}} & id_next=={{id_next}}) %>% nrow) > 0
   if (node.exists) {
-    nodes = nodes %>%
+    nodes_aux = nodes %>%
       filter(id=={{id}} & id_next=={{id_next}}) %>%
-      mutate(text = {{text}})
+      mutate(
+        text = {{text}},
+        attr = {{attr}}
+      )
+    nodes = nodes %>%
+      filter(!(id=={{id}} & id_next=={{id_next}})) %>%
+      bind_rows(nodes_aux)
 
     # new node
   } else {
     nodes = nodes %>% add_row(
       id = {{id}},
       id_next = {{id_next}},
-      text = {{text}}
+      text = {{text}},
+      attr = {{attr}}
     )
   }
 

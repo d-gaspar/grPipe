@@ -76,7 +76,7 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
     if (!is.na(nodes[i, "text"])) {
       nodes_label = c(
         nodes_label,
-        paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", style=filled]")
+        paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", ", nodes[i, "attr"], "]")
       )
     }
   }
@@ -100,24 +100,24 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
         fontname="Verdana"
         graph [splines=ortho, nodesep="', colSpace, '", ranksep="', rowSpace, '"]
         node [shape=plaintext, fontname="Verdana", style=', gridStyle, ']
-        //node [shape=box, fontname="Verdana", style=filled]
         edge [fontname="Verdana"]
         layout=dot
         label="', title, '"
         labelloc = "t"
 
+        // node labels
         ', nodes_label, '
 
-        // arbitrary path on rigid grid
+        // node arrows
         ', node_arrow, '
 
-        edge [weight=1000 style=dashed color=dimgrey]
+        // hide rank arrows
+        edge [weight=1000, style=invis]
 
-        // uncomment to hide the grid
-        edge [style=invis]
-
+        // rank cols (A1, B1, ...)
         ', rank_col, '
 
+        // rank rows (A1, A2, ...)
         ', rank_row, '
 
     }'), width = 2400) %>%

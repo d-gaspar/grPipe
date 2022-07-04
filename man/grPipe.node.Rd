@@ -4,7 +4,14 @@
 \alias{grPipe.node}
 \title{Add or Update grPipe Nodes}
 \usage{
-grPipe.node(nodes, id, id_next, text)
+grPipe.node(
+  nodes,
+  id,
+  id_next,
+  text,
+ 
+    attr = "style=filled, shape=box, fillcolor='#d3d3d3', color='#d3d3d3', margin='0.2,0'"
+)
 }
 \arguments{
 \item{nodes}{data.frame}
@@ -14,9 +21,11 @@ grPipe.node(nodes, id, id_next, text)
 \item{id_next}{character}
 
 \item{text}{character}
+
+\item{attr}{character}
 }
 \value{
-Returns a data.frame with 3 columns (id, id_next and text) where:
+Returns a data.frame with 4 columns (id, id_next, text and attr) where:
 \itemize{
     \item If \strong{id} and \strong{id_next} already exist in the data.frame \strong{nodes}, then return the data.frame \strong{nodes} with the value \strong{text} updated;
     \item Otherwise, add a row in the data.frame \strong{nodes} with the values passed (\strong{id}, \strong{id_next} and \strong{text}) and then return the data.frame \strong{nodes}.

@@ -98,14 +98,14 @@ grPipe.plot(
 # add nodes
 nodes = grPipe.node(nodes, "A3",  "B2",  "project/")
 nodes = grPipe.node(nodes, "B2",  "C1",  "data/")
-nodes = grPipe.node(nodes, "B2",  "C2",  "data/")
+nodes = grPipe.node(nodes, "B2",  "C2",  "data/", "style=filled, shape=box, fillcolor='#fc8d59', color='#d73027', margin='0.3,0.3', fontcolor=white")
 
 nodes = grPipe.node(nodes, "A3",  "B3",  "project/")
 nodes = grPipe.node(nodes, "B3",  "C3",  "src/")
-nodes = grPipe.node(nodes, "B3",  "C4",  "src/")
+nodes = grPipe.node(nodes, "B3",  "C4",  "src/", "style=filled, shape=box, fillcolor='#f1a340', color='#b35806', margin='0.3,0.3', fontcolor=white")
 
-nodes = grPipe.node(nodes, "A3",  "B4",  "project/")
-nodes = grPipe.node(nodes, "B4",  "C5",  "output/")
+nodes = grPipe.node(nodes, "A3",  "B4",  "project/", "style=filled, shape=box, fillcolor='#91bfdb', color='#4575b4', margin='0.3,0.3', fontcolor=white")
+nodes = grPipe.node(nodes, "B4",  "C5",  "output/", "style=filled, shape=box, fillcolor='#91cf60', color='#1a9850', margin='0.3,0.3', fontcolor=white")
 
 # last node (id_next = NA)
 nodes = grPipe.node(nodes, "C1",  NA,  "clinical.tsv")
