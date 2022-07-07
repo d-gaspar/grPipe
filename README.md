@@ -15,8 +15,6 @@ nodes
 
 A data.frame: 1 x 3
 
-A data.frame: 1 x 3
-
 ``` r
 # plot raw grPipe
 grPipe.plot(
@@ -77,8 +75,6 @@ nodes
 |---------|---------|---------|
 | \<chr\> | \<lgl\> | \<lgl\> |
 | C5      | NA      | NA      |
-
-A data.frame: 1 × 3
 
 A data.frame: 1 × 3
 

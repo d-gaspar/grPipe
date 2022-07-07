@@ -37,6 +37,8 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
     gridStyle = "invis"
   }
 
+  #############################################################################
+
   # rows
   rows = nodes %>%
     select(id) %>%
@@ -56,6 +58,8 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
   cols = gsub(pattern = "[A-Z]([0-9]*)", replacement = "\\1", x = cols) %>% as.integer
   cols = 1:max(cols)
 
+  #############################################################################
+
   # rank cols
   rank_col = c()
   for (i in cols) {
@@ -70,17 +74,56 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
   }
   rank_row = paste0(rank_row, collapse = "\n")
 
+  #############################################################################
+
+  # image
+  img_nodes = list()
+  for (i in 1:nrow(nodes)) {
+    if (is.na(nodes[i,"image"])) next
+
+    img_nodes[[nodes[i,"id"]]] = list(
+      image = nodes[i,"image"],
+      width = 10,
+      height = 10
+    )
+  }
+
+  for (i in names(img_nodes)) {
+    # check if image exists
+    if (file.exists(img_nodes[[i]][["image"]])) {
+      img = image_read(img_nodes[[i]][["image"]])
+      img_nodes[[i]][["width"]] = image_info(img)$width
+      img_nodes[[i]][["height"]] = image_info(img)$height
+    } else {
+      stop(paste0("File doesn't exist: ", img_nodes[[i]][["image"]]))
+    }
+  }
+
+  #############################################################################
+
   # nodes label
   nodes_label = c()
   for (i in 1:nrow(nodes)) {
     if (!is.na(nodes[i, "text"])) {
+      # image
+      aux_image = ""
+      if (nodes[i,"id"] %in% names(img_nodes)) {
+        aux_image = paste0(
+          ", width='", (img_nodes[[nodes[i,"id"]]]$width + 2)/72, "'",
+          ", height='", (img_nodes[[nodes[i,"id"]]]$height + 2)/72, "'",
+          ", labelloc = 'b'"
+        )
+      }
+
       nodes_label = c(
         nodes_label,
-        paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", ", nodes[i, "attr"], "]")
+        paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", ", nodes[i, "attr"], aux_image, "]")
       )
     }
   }
   nodes_label = paste0(nodes_label, collapse = "\n")
+
+  #############################################################################
 
   # node arrows
   node_arrow = c()
@@ -94,8 +137,10 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
   }
   node_arrow = paste0(node_arrow, collapse = "\n")
 
-  # save png
-  grViz(paste0('
+  #############################################################################
+
+  # generate graphviz
+  gr = grViz(paste0('
     digraph {
         fontname="Verdana"
         graph [splines=ortho, nodesep="', colSpace, '", ranksep="', rowSpace, '"]
@@ -120,14 +165,91 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
         // rank rows (A1, A2, ...)
         ', rank_row, '
 
-    }'), width = 2400) %>%
-    export_svg %>%
-    charToRaw %>%
-    rsvg_png(pngfile, width = 2400)
+    }'))
+
+  # grViz -> xml
+  gr = gr %>% export_svg %>% cat %>% capture.output
+
+  # remove text border
+  for (i in 1:length(gr)) {
+    if (grepl("<text", gr[i])) {
+      gr[i] = gsub("<text", "<text style=\"stroke: none\"", gr[i])
+    }
+  }
+
+  # add images
+  aux_id = NA
+  aux_points = NA
+  aux_width = NA
+  aux_height = NA
+  aux_x = NA
+  aux_y = NA
+  for (i in 1:length(gr)) {
+    # get id
+    if (grepl("<!-- [A-Z0-9]* -->", gr[i])) {
+      aux_id = gsub("<!-- ([A-Z0-9]*) .*", "\\1", gr[i])
+    }
+
+    # check if id is in the img_nodes
+    if (aux_id %in% names(img_nodes)) {
+      # image
+      aux_image = img_nodes[[aux_id]][["image"]]
+      aux_width = img_nodes[[aux_id]][["width"]]
+      aux_height = img_nodes[[aux_id]][["height"]]
+      print(gr[i])
+
+      # get polygon points
+      if (grepl("<polygon", gr[i])) {
+        aux_points = gsub(".*points=\"(.*)\"/>", "\\1", gr[i]) %>% strsplit(" ")
+        aux_points = aux_points[[1]]
+
+        # x
+        aux_x = as.numeric((aux_points[2] %>% strsplit(","))[[1]][1]) + 1
+
+        # y
+        aux_y = as.numeric((aux_points[2] %>% strsplit(","))[[1]][2]) + 1
+      }
+
+      # add image
+      if (grepl("<text", gr[i])) {
+        gr[i] = paste0(
+          "<image xlink:href=\"", aux_image, "\" ",
+          "width=\"", aux_width, "px\" ",
+          "height=\"", aux_height, "px\" ",
+          "preserveAspectRatio=\"xMinYMin meet\" ",
+          "x=\"", aux_x, "\" ",
+          "y=\"", aux_y, "\"/>",
+          "\n",
+          gr[i]
+        )
+        print(gr[i])
+      }
+
+      if (gr[i] == "</g>") {
+        aux_id = NA
+      }
+    }
+  }
+
+  # xml -> svg
+  gr = paste0(gr, collapse = "\n")
+
+  # SVG -> magick
+  img = image_read(gr %>% charToRaw, density = 200)
+
+  # scale image
+  # img = image_scale(img,"2400")
+
+  # image strip
+  # img = image_strip(img)
+
+  # save png
+  image_write(img, path = pngfile, format = 'png', quality = 100)
+
+  #############################################################################
 
   # plot image on notebook
   if (plot) {
-    readPNG(pngfile) %>%
-      grid.raster
+    plot(img)
   }
 }

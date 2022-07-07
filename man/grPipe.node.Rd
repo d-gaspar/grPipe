@@ -10,7 +10,8 @@ grPipe.node(
   id_next,
   text,
  
-    attr = "style=filled, shape=box, fillcolor='#d3d3d3', color='#d3d3d3', margin='0.2,0'"
+    attr = "style=filled, shape=box, fillcolor='#d3d3d3', color='#d3d3d3', margin='0.2,0'",
+  image = NA
 )
 }
 \arguments{
@@ -23,9 +24,11 @@ grPipe.node(
 \item{text}{character}
 
 \item{attr}{character}
+
+\item{image}{character}
 }
 \value{
-Returns a data.frame with 4 columns (id, id_next, text and attr) where:
+Returns a data.frame with 5 columns (id, id_next, text, attr and image) where:
 \itemize{
     \item If \strong{id} and \strong{id_next} already exist in the data.frame \strong{nodes}, then return the data.frame \strong{nodes} with the value \strong{text} updated;
     \item Otherwise, add a row in the data.frame \strong{nodes} with the values passed (\strong{id}, \strong{id_next} and \strong{text}) and then return the data.frame \strong{nodes}.

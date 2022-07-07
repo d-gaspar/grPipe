@@ -20,6 +20,8 @@ Returns a data.frame with 3 columns (id, id_next and text) where:
         \item id = paste0(LETTERS[nrow], ncol)
         \item id_next = NA
         \item text = NA
+        \item attr = NA
+        \item image = NA
     }
 }
 }

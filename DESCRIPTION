@@ -13,8 +13,6 @@ Imports:
   DiagrammeR,
   DiagrammeRsvg,
   dplyr,
-  magrittr,
-  rsvg,
-  png,
-  grid
+  magick,
+  magrittr
 RoxygenNote: 7.2.0

@@ -15,6 +15,8 @@
 #'         \item id = paste0(LETTERS[nrow], ncol)
 #'         \item id_next = NA
 #'         \item text = NA
+#'         \item attr = NA
+#'         \item image = NA
 #'     }
 #' }
 #'
@@ -32,14 +34,16 @@ grPipe.create = function(nrow = 0, ncol = 0) {
       id = character(0),
       id_next = character(0),
       text = character(0),
-      attr = character(0)
+      attr = character(0),
+      image = character(0)
     )
   } else {
     nodes = data.frame(
       id = paste0(LETTERS[nrow], ncol),
       id_next = NA,
       text = NA,
-      attr = NA
+      attr = NA,
+      image = NA
     )
   }
 

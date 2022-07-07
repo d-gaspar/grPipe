@@ -9,8 +9,9 @@
 #' @param id_next character
 #' @param text character
 #' @param attr character
+#' @param image character
 #'
-#' @return Returns a data.frame with 4 columns (id, id_next, text and attr) where:
+#' @return Returns a data.frame with 5 columns (id, id_next, text, attr and image) where:
 #' \itemize{
 #'     \item If \strong{id} and \strong{id_next} already exist in the data.frame \strong{nodes}, then return the data.frame \strong{nodes} with the value \strong{text} updated;
 #'     \item Otherwise, add a row in the data.frame \strong{nodes} with the values passed (\strong{id}, \strong{id_next} and \strong{text}) and then return the data.frame \strong{nodes}.
@@ -30,7 +31,7 @@
 #'
 #' @export
 
-grPipe.node = function(nodes, id, id_next, text, attr = "style=filled, shape=box, fillcolor='#d3d3d3', color='#d3d3d3', margin='0.2,0'") {
+grPipe.node = function(nodes, id, id_next, text, attr = "style=filled, shape=box, fillcolor='#d3d3d3', color='#d3d3d3', margin='0.2,0'", image = NA) {
   # node already exist
   node.exists = (nodes %>% filter(id=={{id}} & id_next=={{id_next}}) %>% nrow) > 0
   if (node.exists) {
@@ -38,7 +39,8 @@ grPipe.node = function(nodes, id, id_next, text, attr = "style=filled, shape=box
       filter(id=={{id}} & id_next=={{id_next}}) %>%
       mutate(
         text = {{text}},
-        attr = {{attr}}
+        attr = {{attr}},
+        image = {{image}}
       )
     nodes = nodes %>%
       filter(!(id=={{id}} & id_next=={{id_next}})) %>%
@@ -50,7 +52,8 @@ grPipe.node = function(nodes, id, id_next, text, attr = "style=filled, shape=box
       id = {{id}},
       id_next = {{id_next}},
       text = {{text}},
-      attr = {{attr}}
+      attr = {{attr}},
+      image = {{image}}
     )
   }
 
