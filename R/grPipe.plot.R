@@ -196,7 +196,7 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
       aux_image = img_nodes[[aux_id]][["image"]]
       aux_width = img_nodes[[aux_id]][["width"]]
       aux_height = img_nodes[[aux_id]][["height"]]
-      print(gr[i])
+      # print(gr[i])
 
       # get polygon points
       if (grepl("<polygon", gr[i])) {
@@ -222,7 +222,6 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
           "\n",
           gr[i]
         )
-        print(gr[i])
       }
 
       if (gr[i] == "</g>") {
