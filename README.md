@@ -1,19 +1,30 @@
+# Updates
+
+-   0.1.0 - first version
+-   0.2.0 - node attributes
+-   0.3.0 - image on node
+
+# Next Steps
+
+-   save dot option
+-   save svg option
+-   add arrow text
+-   arrow attributes
+-   html on node
+
 # Example 1
 
 ``` r
 library(grPipe)
 
 # create grPipe
-nodes = grPipe.create(nrow = 2, ncol = 5)
+nodes = grPipe.create(nrow = 3, ncol = 3)
 nodes
 ```
 
-| id      | id_next | text    |
-|---------|---------|---------|
-| \<chr\> | \<lgl\> | \<lgl\> |
-| B5      | NA      | NA      |
-
-A data.frame: 1 x 3
+| id  | id_next | text | attr | image |
+|-----|---------|------|------|-------|
+| B5  | NA      | NA   | NA   | NA    |
 
 ``` r
 # plot raw grPipe
@@ -27,17 +38,74 @@ grPipe.plot(
 
 ![](man/figures/grPipe.1a.png)
 
+Create png images
+
+``` r
+# iris
+png("../iris1.png", width = 200, height = 200)
+p = boxplot(
+  main = "Iris",
+  x = as.matrix(iris[,1:4]),
+  col = c("#1b98e0", "#ff7f00", "#e41a1c", "#4daf4a"),
+  xaxt = "n"
+)
+tick = seq_along(p$names)
+text(tick, par("usr")[3] - 0.3, p$names, srt = 45, xpd = T, adj = 1, cex = 1)
+dev.off()
+
+# iris - setosa
+png("../iris2.png", width = 200, height = 200)
+p = boxplot(
+  main = "Iris - Setosa",
+  x = as.matrix(iris[iris$Species=="setosa",1:4]),
+  col = c("#1b98e0", "#ff7f00", "#e41a1c", "#4daf4a"),
+  xaxt = "n"
+)
+tick = seq_along(p$names)
+text(tick, par("usr")[3] - 0.3, p$names, srt = 45, xpd = T, adj = 1, cex = 1)
+dev.off()
+
+# iris - versicolor
+png("../iris3.png", width = 200, height = 200)
+p = boxplot(
+  main = "Iris - Versicolor",
+  x = as.matrix(iris[iris$Species=="versicolor",1:4]),
+  col = c("#1b98e0", "#ff7f00", "#e41a1c", "#4daf4a"),
+  xaxt = "n"
+)
+tick = seq_along(p$names)
+text(tick, par("usr")[3] - 0.3, p$names, srt = 45, xpd = T, adj = 1, cex = 1)
+dev.off()
+
+# iris - virginica
+png("../iris4.png", width = 200, height = 200)
+p = boxplot(
+  main = "Iris - Virginica",
+  x = as.matrix(iris[iris$Species=="virginica",1:4]),
+  col = c("#1b98e0", "#ff7f00", "#e41a1c", "#4daf4a"),
+  xaxt = "n"
+)
+tick = seq_along(p$names)
+text(tick, par("usr")[3] - 0.3, p$names, srt = 45, xpd = T, adj = 1, cex = 1)
+dev.off()
+```
+
 ``` r
 # add nodes
-nodes = grPipe.node(nodes, "A1",  "A2",  "input\n31 samples")
-nodes = grPipe.node(nodes, "A2",  "B2",  "step 1\n25 samples")
-nodes = grPipe.node(nodes, "B2",  "B3",  "step 2\n20 samples")
-nodes = grPipe.node(nodes, "B3",  "B4",  "step 3\n16 samples")
-nodes = grPipe.node(nodes, "B4",  "A4",  "step 4\n13 samples")
-nodes = grPipe.node(nodes, "A4",  "A5",  "step 5\n11 samples")
+nodes = grPipe.node(nodes, "A1",  "A2",  paste0("Iris\n", nrow(iris), " samples"))
+nodes = grPipe.node(nodes, "A2",  "B2",  "", image = "../iris1.png")
+nodes = grPipe.node(nodes, "B2",  "C1", "")
+nodes = grPipe.node(nodes, "B2",  "C2", "")
+nodes = grPipe.node(nodes, "B2",  "C3", paste0(
+  "Setosa: ", sum(iris$Species=="setosa"),
+  "\nVersicolor: ", sum(iris$Species=="versicolor"),
+  "\nVirginica: ", sum(iris$Species=="virginica")
+))
 
-# last node (id_next = NA)
-nodes = grPipe.node(nodes, "A5",  NA,  "output\n10 samples")
+# last nodes (id_next = NA)
+nodes = grPipe.node(nodes, "C1",  NA,  "", image = "../iris2.png")
+nodes = grPipe.node(nodes, "C2",  NA,  "", image = "../iris3.png")
+nodes = grPipe.node(nodes, "C3",  NA,  "", image = "../iris4.png")
 ```
 
 ``` r
@@ -54,7 +122,11 @@ grPipe.plot(
 
 ``` r
 # plot grPipe (showGrid = FALSE)
-grPipe.plot(nodes = nodes, pngfile = "man/figures/grPipe.1c.png", title = "grPipe")
+grPipe.plot(
+  nodes = nodes,
+  pngfile = "man/figures/grPipe.1c.png",
+  title = "grPipe"
+)
 ```
 
 ![](man/figures/grPipe.1c.png)
@@ -68,17 +140,7 @@ library(grPipe)
 
 # create grPipe
 nodes = grPipe.create(nrow = 3, ncol = 5)
-nodes
-```
 
-| id      | id_next | text    |
-|---------|---------|---------|
-| \<chr\> | \<lgl\> | \<lgl\> |
-| C5      | NA      | NA      |
-
-A data.frame: 1 × 3
-
-``` r
 # plot raw grPipe
 grPipe.plot(
     nodes = nodes,
@@ -140,7 +202,8 @@ grPipe.plot(
 
 ![](man/figures/grPipe.2c.png)
 
+------------------------------------------------------------------------
+
 # References
 
-> directory icon
-https://www.freeiconspng.com/img/12388
+> directory icon [man/figures/directory-icon-png-8.png] <https://www.freeiconspng.com/img/12388>

@@ -115,6 +115,8 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
         )
       }
 
+      if (nodes[i, "text"] == "") nodes[i, "text"] = " "
+
       nodes_label = c(
         nodes_label,
         paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", ", nodes[i, "attr"], aux_image, "]")
