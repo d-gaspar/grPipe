@@ -11,6 +11,7 @@
 -   add arrow text
 -   arrow attributes
 -   html on node
+-   optimization
 
 # Example 1
 
@@ -24,7 +25,7 @@ nodes
 
 | id  | id_next | text | attr | image |
 |-----|---------|------|------|-------|
-| B5  | NA      | NA   | NA   | NA    |
+| C3  | NA      | NA   | NA   | NA    |
 
 ``` r
 # plot raw grPipe
