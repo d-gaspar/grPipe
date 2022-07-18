@@ -76,8 +76,9 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
 
   #############################################################################
 
-  # image
+  # image ($imageTag)
   img_nodes = list()
+  # search nodes with image tags
   for (i in 1:nrow(nodes)) {
     if (is.na(nodes[i,"image"])) next
 
@@ -88,6 +89,7 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
     )
   }
 
+  # check if image file exist
   for (i in names(img_nodes)) {
     # check if image exists
     if (file.exists(img_nodes[[i]][["image"]])) {
@@ -180,14 +182,14 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
   # grViz -> xml
   gr = gr %>% export_svg %>% cat %>% capture.output
 
-  # remove text border
+  # remove text border ($removeTextBorder)
   for (i in 1:length(gr)) {
     if (grepl("<text", gr[i])) {
       gr[i] = gsub("<text", "<text style=\"stroke: none\"", gr[i])
     }
   }
 
-  # add images
+  # add images ($imageTag)
   aux_id = NA
   aux_points = NA
   aux_width = NA
