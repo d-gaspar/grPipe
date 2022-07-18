@@ -103,6 +103,7 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
 
   # nodes label
   nodes_label = c()
+  aux_label = ""
   for (i in 1:nrow(nodes)) {
     if (!is.na(nodes[i, "text"])) {
       # image
@@ -117,9 +118,16 @@ grPipe.plot = function(nodes, pngfile, title="", plot=TRUE, showGrid=FALSE, colS
 
       if (nodes[i, "text"] == "") nodes[i, "text"] = " "
 
+      # html
+      if (grepl(pattern = "^<.*>$", x = nodes[i, "text"])) {
+        aux_label = nodes[i, "text"]
+      } else {
+        aux_label = paste0("\"", nodes[i, "text"], "\"")
+      }
+
       nodes_label = c(
         nodes_label,
-        paste0(nodes[i,"id"], " [label=\"", nodes[i, "text"], "\", ", nodes[i, "attr"], aux_image, "]")
+        paste0(nodes[i,"id"], " [label=", aux_label, ", ", nodes[i, "attr"], aux_image, "]")
       )
     }
   }

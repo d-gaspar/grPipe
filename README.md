@@ -97,11 +97,26 @@ nodes = grPipe.node(nodes, "A1",  "A2",  paste0("Iris\n", nrow(iris), " samples"
 nodes = grPipe.node(nodes, "A2",  "B2",  "", image = "../iris1.png")
 nodes = grPipe.node(nodes, "B2",  "C1", "")
 nodes = grPipe.node(nodes, "B2",  "C2", "")
-nodes = grPipe.node(nodes, "B2",  "C3", paste0(
-  "Setosa: ", sum(iris$Species=="setosa"),
-  "\nVersicolor: ", sum(iris$Species=="versicolor"),
-  "\nVirginica: ", sum(iris$Species=="virginica")
-))
+nodes = grPipe.node(nodes, "B2",  "C3", paste0("<
+<TABLE BORDER='1' CELLSPACING='0' CELLBORDER='1'>
+  <TR>
+    <TD ALIGN='center' WIDTH='100' BGCOLOR='#d3d3d3'><B>Specie</B></TD>
+    <TD BGCOLOR='#d3d3d3'><B>N</B></TD>
+  </TR>
+  <TR>
+    <TD ALIGN='left'><B>Setosa</B></TD>
+    <TD>", sum(iris$Species=="setosa"), "</TD>
+  </TR>
+  <TR>
+    <TD ALIGN='left'><B>Versicolor</B></TD>
+    <TD>", sum(iris$Species=="versicolor"), "</TD>
+  </TR>
+  <TR>
+    <TD ALIGN='left'><B>Virginica</B></TD>
+    <TD>", sum(iris$Species=="virginica"), "</TD>
+  </TR>
+</TABLE>
+>"), attr = "style=filled, shape=none, fillcolor='#ffffff', color='#000000', margin=0")
 
 # last nodes (id_next = NA)
 nodes = grPipe.node(nodes, "C1",  NA,  "", image = "../iris2.png")
@@ -208,3 +223,4 @@ grPipe.plot(
 # References
 
 > directory icon [man/figures/directory-icon-png-8.png] <https://www.freeiconspng.com/img/12388>
+
